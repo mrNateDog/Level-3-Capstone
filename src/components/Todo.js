@@ -1,6 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import CloseButton from "react-bootstrap/CloseButton";
-import { db } from "./firebase.js";
+import { db } from "../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import "./todo.css";
 const Todo = ({ arr }) => {

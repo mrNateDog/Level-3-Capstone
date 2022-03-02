@@ -4,10 +4,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./App.css";
-import Todo from "./Todo";
+import Todo from "./components/Todo";
 import Register from "./components/Register";
 import Login from "./components/login";
-import { db } from "./firebase.js";
+import { db } from "./firebase";
 import {
   collection,
   query,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { register } from "../auth";
+import { register } from "../Auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Register = () => {
