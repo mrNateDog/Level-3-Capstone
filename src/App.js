@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./App.css";
 import Todo from "./components/Todo";
-import Register from "./components/Register";
-import Login from "./components/login";
 import { db } from "./firebase";
 import {
   collection,
@@ -20,17 +17,6 @@ import {
 //collection ref, order by functionality
 const q = query(collection(db, "todos"), orderBy("timestamp", "desc"));
 
-//register and login
-function User() {
-  return (
-    <Router>
-      <div className="User">
-        <Route exact path="/Register" component={Register} />
-        <Route exact path="/Login" component={Login} />
-      </div>
-    </Router>
-  );
-}
 //firebase functionality
 function App() {
   const [todos, setTodos] = useState([]);
@@ -55,19 +41,19 @@ function App() {
   };
   return (
     <div className="App">
-      <h2> Nathan's ToDo List</h2>
+      <h4>Add a Task</h4>
       <Form>
         <InputGroup className="mb-3">
           <Form.Control
             id="outlined-basic"
             type="text"
-            variant="primary"
+            variant="outline-secondary"
             size="lg"
             placeholder="Task Description"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <Button variant="outline-primary" onClick={addTodo}>
+          <Button variant="outline-secondary" onClick={addTodo}>
             Add Task
           </Button>
         </InputGroup>
@@ -77,7 +63,12 @@ function App() {
           <Todo key={item} arr={item} />
         ))}
       </ul>
+      <br></br>
+      <h6>
+        you have <a variant="alert-danger">{todos.length}</a> items left to
+        complete.
+      </h6>
     </div>
   );
 }
-export default { App, User };
+export default App;

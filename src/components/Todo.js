@@ -1,19 +1,25 @@
 import ListGroup from "react-bootstrap/ListGroup";
-import CloseButton from "react-bootstrap/CloseButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { db } from "../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import "./todo.css";
 const Todo = ({ arr }) => {
   return (
-    <ListGroup className="todo__list" variant="flush">
-      <ListGroup.Item primary={arr.item.todo}></ListGroup.Item>
-      <CloseButton
-        aria-label="delete task"
-        onClick={() => {
-          deleteDoc(doc(db, "todos", arr.id));
-        }}
-      />
-    </ListGroup>
+    <div>
+      <ListGroup className="todoList" variant="flush">
+        <ListGroup.Item>
+          {arr.item.todo}
+          <DeleteIcon
+            fontSize="large"
+            style={{ opacity: 0.7 }}
+            aria-label="delete task"
+            onClick={() => {
+              deleteDoc(doc(db, "todos", arr.id));
+            }}
+          />
+        </ListGroup.Item>
+      </ListGroup>
+    </div>
   );
 };
 export default Todo;
