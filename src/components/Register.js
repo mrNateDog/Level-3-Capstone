@@ -45,7 +45,11 @@ const Register = async () => {
         }}
       />
 
-      <button className="btn btn-primary btn-block  m-3" onClick={Register}>
+      <button
+        className="btn btn-primary btn-block m-3"
+        type="submit"
+        onClick={Register}
+      >
         {" "}
         Create User
       </button>

@@ -53,7 +53,7 @@ function App() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <Button variant="outline-secondary" onClick={addTodo}>
+          <Button variant="outline-secondary" type="submit" onClick={addTodo}>
             Add Task
           </Button>
         </InputGroup>

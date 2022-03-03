@@ -45,7 +45,8 @@ const Login = async () => {
 
       <button
         type="submit"
-        className="btn btn-primary btn-block  m-3"
+        className="btn btn-primary btn-block m-3"
+        type="submit"
         onClick={Login}
       >
         {" "}
