@@ -1,43 +1,55 @@
-import React, { useState } from "react";
-import { register } from "../Auth";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../firebase";
 
-const Register = () => {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
+const Register = async () => {
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+
+  const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
   });
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await register(form);
-  };
+  try {
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      registerEmail,
+      registerPassword
+    );
+    console.log(user);
+  } catch (error) {
+    alert(error.message);
+  }
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Create An Account</h3>
-      <div className="form-group m-3">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          id="mail"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-      </div>
-      <div className="form-group m-3">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-      </div>
-      <button type="submit" className="btn btn-primary btn-block  m-3">
-        Sign Up
+    <div>
+      <h3>Register</h3>
+      <h6>Create an Account</h6>
+      <input
+        type="email"
+        className="form-control"
+        placeholder="Enter email"
+        onChange={(event) => {
+          setRegisterEmail(event.target.value);
+        }}
+      />
+      <input
+        type="password"
+        className="form-control"
+        placeholder="Enter password"
+        onChange={(event) => {
+          setRegisterPassword(event.target.value);
+        }}
+      />
+
+      <button className="btn btn-primary btn-block  m-3" onClick={Register}>
+        {" "}
+        Create User
       </button>
-    </form>
+    </div>
   );
 };
-
 export default Register;

@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import User from "./User";
+import TopNavBar from "./TopNavBar";
+
 ReactDOM.render(
   <React.StrictMode>
-    <User />
+    <TopNavBar />
     <App />
   </React.StrictMode>,
   document.getElementById("root")

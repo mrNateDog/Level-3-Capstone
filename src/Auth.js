@@ -1,15 +1,23 @@
-import firebase from "firebase/compat/app";
-import "firebase/auth";
-import { auth } from "./firebase";
+import React, { useEffect, useState } from "react";
+import firebaseConfig from "./firebase";
 
-export const register = async ({ email, password }) => {
-  const resp = await firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password);
-  return resp.user;
-};
+export const AuthContext = React.createContext();
 
-export const login = async ({ email, password }) => {
-  const res = await firebase.auth().signInWithEmailAndPassword(email, password);
-  return res.user;
+export const AuthProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+  useEffect(() => {
+    firebaseConfig.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+  }, []);
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  return (
+    <AuthContext.Provider value={{ currentUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

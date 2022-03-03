@@ -1,48 +1,57 @@
-import React, { useState } from "react";
-import { login } from "../Auth";
-import { Form, Button } from "react-bootstrap";
+import { useState } from "react";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Login = () => {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await login(form);
-  };
-  return (
-    <Form>
-      <h3>Log In</h3>
-      <Form.Group
-        className="m-3"
-        controlId="formBasicEmail"
-        onSubmit={handleSubmit}
-      >
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          id="mail"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <Form.Text className="text-muted">{this.state.email}</Form.Text>
-      </Form.Group>
+const Login = async () => {
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-      <Form.Group className="m-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-      </Form.Group>
-      <Button variant="primary m-3" type="submit">
-        Submit
-      </Button>
-    </Form>
+  const [user, setUser] = useState({});
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  try {
+    const user = await signInWithEmailAndPassword(
+      auth,
+      loginEmail,
+      loginPassword
+    );
+    console.log(user);
+  } catch (error) {
+    alert(error.message);
+  }
+  return (
+    <div>
+      <h3>Login</h3>
+      <input
+        type="email"
+        className="form-control"
+        placeholder="Enter Email"
+        id="email"
+        onChange={(event) => {
+          setLoginEmail(event.target.value);
+        }}
+      />
+      <input
+        type="password"
+        className="form-control"
+        placeholder="Enter password"
+        onChange={(event) => {
+          setLoginPassword(event.target.value);
+        }}
+      />
+
+      <button
+        type="submit"
+        className="btn btn-primary btn-block  m-3"
+        onClick={Login}
+      >
+        {" "}
+        Login
+      </button>
+    </div>
   );
 };
-
 export default Login;
