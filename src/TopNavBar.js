@@ -28,7 +28,7 @@ function TopNavBar() {
           </Routes>
         </AuthProvider>
       </Router>
-      <Navbar bg="secondary" variant="dark" fixed="top">
+      <Navbar fixed="top" bg="secondary" variant="dark">
         <Container>
           <Navbar.Brand>
             <img
@@ -43,7 +43,7 @@ function TopNavBar() {
           <Nav className="me-auto">
             <Nav.Link href="/app">ToDo</Nav.Link>
             <Nav.Link href="/register">Register</Nav.Link>
-            <Nav.Link href="./login">Log In</Nav.Link>
+            <Nav.Link href="/login">Log In</Nav.Link>
             <Nav.Link onClick={logout}>Log Out</Nav.Link>
           </Nav>
         </Container>
