@@ -11,7 +11,6 @@ const Login = async () => {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
-
   try {
     const user = await signInWithEmailAndPassword(
       auth,

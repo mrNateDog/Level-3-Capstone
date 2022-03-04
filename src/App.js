@@ -4,7 +4,8 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./App.css";
 import Todo from "./components/Todo";
-import { db } from "./firebase";
+import { db, auth } from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import {
   collection,
   query,
@@ -19,6 +20,7 @@ const q = query(collection(db, "todos"), orderBy("timestamp", "desc"));
 
 //firebase functionality
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
   useEffect(() => {

@@ -7,7 +7,6 @@ import TopNavBar from "./TopNavBar";
 ReactDOM.render(
   <React.StrictMode>
     <TopNavBar />
-    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
