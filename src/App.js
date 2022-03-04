@@ -60,7 +60,7 @@ function App() {
       </Form>
       <ul>
         {todos.map((item) => (
-          <Todo key={item} arr={item} />
+          <Todo key={item.id} arr={item} />
         ))}
       </ul>
       <br></br>

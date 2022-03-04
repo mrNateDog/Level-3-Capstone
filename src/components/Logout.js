@@ -1,12 +1,8 @@
-import { getAuth, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Logout = getAuth();
-signOut(Logout)
-  .then(() => {
-    // Sign-out successful.
-  })
-  .catch((error) => {
-    // An error happened.
-  });
+const Logout = async () => {
+  await signOut(auth);
+};
 export default Logout;
