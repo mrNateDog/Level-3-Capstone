@@ -3,10 +3,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./App.css";
-import { AuthProvider } from "./Auth";
 import Todo from "./components/Todo";
-import { db, auth } from "./firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { db } from "./firebase";
 import {
   collection,
   query,

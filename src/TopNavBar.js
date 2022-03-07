@@ -34,13 +34,13 @@ function TopNavBar() {
             <img
               href="/app"
               alt="NM TODO Logo"
-              src="../img/logo.png"
+              src="../logo.png"
               width="200"
               height="50"
               className="d-inline-block align-top"
             />
           </Navbar.Brand>
-          <Nav className="me-auto">
+          <Nav className="ms-auto">
             <Nav.Link href="/app">ToDo</Nav.Link>
             <Nav.Link href="/register">Register</Nav.Link>
             <Nav.Link href="/login">Log In</Nav.Link>
