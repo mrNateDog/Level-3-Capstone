@@ -4,13 +4,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase";
-
+import { useNavigate } from "react-router-dom";
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
   const [user, setUser] = useState({});
 
+  const navigate = useNavigate();
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -22,7 +23,8 @@ function Register() {
         registerEmail,
         registerPassword
       );
-      console.log(user);
+      localStorage.setItem("access_token", user._tokenResponse.idToken);
+      navigate("/app", { replace: true });
     } catch (error) {
       alert(error.message);
     }

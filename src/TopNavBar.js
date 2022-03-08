@@ -7,11 +7,13 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import App from "./App";
+import PrivateRoute from "./PrivateRoute";
 
 //register and login
 function TopNavBar() {
   //setting user state here for logout-- not sure about this
   const [currentUser, setCurrentUser] = useState(null);
+  const isAuthenticated = localStorage.getItem("access_token");
   //putting the sign-out functionality here-- not sure
   const logout = async () => {
     await signOut(auth);
@@ -22,8 +24,17 @@ function TopNavBar() {
       <Router>
         <AuthProvider value={{ currentUser }}>
           <Routes>
-            <Route path="/app" element={<App />}></Route>
             <Route path="/register" element={<Register />}></Route>
+
+            <Route
+              path="/app"
+              element={
+                <PrivateRoute isAuthenticated={isAuthenticated}>
+                  <App></App>
+                </PrivateRoute>
+              }
+            />
+
             <Route path="/login" element={<Login />}></Route>
           </Routes>
         </AuthProvider>
@@ -32,7 +43,6 @@ function TopNavBar() {
         <Container>
           <Navbar.Brand>
             <img
-              href="/app"
               alt="NM TODO Logo"
               src="../logo.png"
               width="200"
