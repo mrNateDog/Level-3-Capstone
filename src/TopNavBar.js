@@ -1,10 +1,5 @@
 import { React, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./Auth";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import Login from "./components/Login";

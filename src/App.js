@@ -28,7 +28,7 @@ function App({ user }) {
   //const [currentUser, setCurrentUser] = useState(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
-  console.log(user);
+  //console.log(user);
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
       setTodos(
