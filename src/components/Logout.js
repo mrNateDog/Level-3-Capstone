@@ -1,8 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-const Logout = async () => {
-  await signOut(auth);
+export const removeToken = () => {
+  // export function from module
+  localStorage.removeItem("access_token");
 };
-export default Logout;

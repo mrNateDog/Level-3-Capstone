@@ -1,57 +1,61 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
-const Login = async () => {
+function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [user, setUser] = useState({});
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-  try {
-    const user = await signInWithEmailAndPassword(
-      auth,
-      loginEmail,
-      loginPassword
-    );
-    console.log(user);
-  } catch (error) {
-    alert(error.message);
-  }
-  return (
-    <div>
-      <h3>Login</h3>
-      <input
-        type="email"
-        className="form-control"
-        placeholder="Enter Email"
-        id="email"
-        onChange={(event) => {
-          setLoginEmail(event.target.value);
-        }}
-      />
-      <input
-        type="password"
-        className="form-control"
-        placeholder="Enter password"
-        onChange={(event) => {
-          setLoginPassword(event.target.value);
-        }}
-      />
+  // const [setUser] = useState({});
 
-      <button
-        type="submit"
-        className="btn btn-primary btn-block m-3"
-        type="submit"
-        onClick={Login}
-      >
-        {" "}
-        Login
-      </button>
+  const navigate = useNavigate();
+
+  /* onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });*/
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      localStorage.setItem("access_token", user._tokenResponse.idToken);
+      navigate("/app", { replace: true });
+      console.log(user);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  return (
+    <div className="App">
+      <div>
+        <h3>Login</h3>
+        <input
+          placeholder="Email..."
+          onChange={(event) => {
+            setLoginEmail(event.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          onChange={(event) => {
+            setLoginPassword(event.target.value);
+          }}
+        />
+
+        <button type="submit" onClick={login}>
+          {" "}
+          Login
+        </button>
+        <br></br>
+        <h6>Don't have an account? Register here</h6>
+      </div>
     </div>
   );
-};
+}
+
 export default Login;

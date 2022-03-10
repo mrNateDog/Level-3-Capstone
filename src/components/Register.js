@@ -5,16 +5,18 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
-  const [user, setUser] = useState({});
+  // const [setUser] = useState({});
 
   const navigate = useNavigate();
-  onAuthStateChanged(auth, (currentUser) => {
+
+  /*onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
-  });
+  });*/
 
   const register = async () => {
     try {
@@ -25,6 +27,7 @@ function Register() {
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
       navigate("/app", { replace: true });
+      alert("Account created successfully!");
     } catch (error) {
       alert(error.message);
     }
@@ -32,7 +35,7 @@ function Register() {
   return (
     <div className="App">
       <div>
-        <h3> Register User </h3>
+        <h3>Register</h3>
         <input
           placeholder="Email..."
           value={registerEmail}
