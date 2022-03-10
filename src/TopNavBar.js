@@ -1,60 +1,75 @@
 import { React, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "./firebase";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Redirect,
+} from "react-router-dom";
 import { AuthProvider } from "./Auth";
 import { Nav, Navbar, Container } from "react-bootstrap";
-import Register from "./components/Register";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import App from "./App";
 import PrivateRoute from "./PrivateRoute";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Logo from "./img/logo.png";
 
 //register and login
-function TopNavBar() {
+function TopNavBar({ auth }) {
   //setting user state here for logout-- not sure about this
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setUser] = useState(null);
   const isAuthenticated = localStorage.getItem("access_token");
+
+  auth.onAuthStateChanged(function (user) {
+    if (user) {
+      setUser(user);
+    } else {
+    }
+  });
   //putting the sign-out functionality here-- not sure
-  const logout = async () => {
-    await signOut(auth);
-    alert("signed out");
+  const removeToken = (isAuthenticated) => {
+    // export function from module
+    localStorage.removeItem("access_token");
+    // setToken(null);
+    //alert("signed out");
   };
   return (
     <div>
+      <div>
+        <h6>Please Login</h6>
+      </div>
       <Router>
         <AuthProvider value={{ currentUser }}>
           <Routes>
-            <Route path="/register" element={<Register />}></Route>
-
+            <Route exact path="/" element={<Login />}></Route>
             <Route
               path="/app"
               element={
                 <PrivateRoute isAuthenticated={isAuthenticated}>
-                  <App></App>
+                  <App user={currentUser}></App>
                 </PrivateRoute>
               }
             />
-
             <Route path="/login" element={<Login />}></Route>
           </Routes>
         </AuthProvider>
       </Router>
       <Navbar fixed="top" bg="secondary" variant="dark">
         <Container>
-          <Navbar.Brand>
+          <Navbar.Brand href="/app">
             <img
-              alt="NM TODO Logo"
-              src="../logo.png"
+              src={Logo}
               width="200"
               height="50"
               className="d-inline-block align-top"
+              alt="Logo"
             />
           </Navbar.Brand>
           <Nav className="ms-auto">
             <Nav.Link href="/app">ToDo</Nav.Link>
             <Nav.Link href="/register">Register</Nav.Link>
             <Nav.Link href="/login">Log In</Nav.Link>
-            <Nav.Link onClick={logout}>Log Out</Nav.Link>
+            <Nav.Link onClick={removeToken}>Log Out</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
