@@ -12,22 +12,30 @@ import {
   onSnapshot,
   addDoc,
   serverTimestamp,
+  where,
 } from "firebase/firestore";
 
 //collection ref, order by functionality
-const q = query(collection(db, "todos"), orderBy("timestamp", "desc"));
+const q = query(
+  collection(db, "todos"),
+  orderBy("timestamp", "desc")
+  //need to get the userID
+  // where("userToken", "==", "user.uid").get()
+);
 
 //firebase functionality
-function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+function App({ user }) {
+  //const [currentUser, setCurrentUser] = useState(null);
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
+  console.log(user);
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
       setTodos(
         snapshot.docs.map((doc) => ({
           id: doc.id,
           item: doc.data(),
+          //userId: .doc(user.uid),
         }))
       );
     });
@@ -37,6 +45,8 @@ function App() {
     addDoc(collection(db, "todos"), {
       todo: input,
       timestamp: serverTimestamp(),
+      owner: user.uid,
+      //need to add the user id to each item
     });
     setInput("");
   };
