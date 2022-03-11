@@ -2,7 +2,7 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-
+import "../App.css";
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -23,7 +23,7 @@ function Login() {
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
       navigate("/app", { replace: true });
-      console.log(user);
+      //console.log(user);
     } catch (error) {
       alert(error.message);
     }
@@ -51,8 +51,6 @@ function Login() {
           {" "}
           Login
         </button>
-        <br></br>
-        <h6>Don't have an account? Register here</h6>
       </div>
     </div>
   );

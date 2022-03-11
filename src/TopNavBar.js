@@ -31,24 +31,24 @@ function TopNavBar({ auth }) {
   return (
     <div>
       <div>
-        <h6>Please Login</h6>
+        <Router>
+          <AuthProvider value={{ currentUser }}>
+            <Routes>
+              <Route exact path="/" element={<Login />}></Route>
+              <Route
+                path="/app"
+                element={
+                  <PrivateRoute isAuthenticated={isAuthenticated}>
+                    <App user={currentUser}></App>
+                  </PrivateRoute>
+                }
+              />
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+            </Routes>
+          </AuthProvider>
+        </Router>
       </div>
-      <Router>
-        <AuthProvider value={{ currentUser }}>
-          <Routes>
-            <Route exact path="/" element={<Login />}></Route>
-            <Route
-              path="/app"
-              element={
-                <PrivateRoute isAuthenticated={isAuthenticated}>
-                  <App user={currentUser}></App>
-                </PrivateRoute>
-              }
-            />
-            <Route path="/login" element={<Login />}></Route>
-          </Routes>
-        </AuthProvider>
-      </Router>
       <Navbar fixed="top" bg="secondary" variant="dark">
         <Container>
           <Navbar.Brand href="/app">
@@ -61,7 +61,6 @@ function TopNavBar({ auth }) {
             />
           </Navbar.Brand>
           <Nav className="ms-auto">
-            <Nav.Link href="/app">ToDo</Nav.Link>
             <Nav.Link href="/register">Register</Nav.Link>
             <Nav.Link href="/login">Log In</Nav.Link>
             <Nav.Link onClick={removeToken}>Log Out</Nav.Link>
