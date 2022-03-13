@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./App.css";
 import Todo from "./components/Todo";
-import { db, user } from "./firebase";
+
 import {
   collection,
   query,
@@ -14,21 +14,25 @@ import {
   serverTimestamp,
   where,
 } from "firebase/firestore";
-
-//collection ref, order by functionality
-
-const q = query(
-  collection(db, "todos"),
-  orderBy("timestamp", "desc"),
-  where("userId", "==", user.uid)
-);
+import { db } from "./firebase";
 
 //firebase functionality
 function App({ user }) {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
-  //console.log(user);
+  const [lastChange, setLastChange] = useState("");
+
+  //executing the query
   useEffect(() => {
+    //console.log(user);
+    if (user == null) return;
+
+    var q = query(
+      collection(db, "todos"),
+      orderBy("timestamp", "desc"),
+      where("userId", "==", user.uid)
+    );
+
     onSnapshot(q, (snapshot) => {
       setTodos(
         snapshot.docs.map((doc) => ({
@@ -37,7 +41,9 @@ function App({ user }) {
         }))
       );
     });
-  }, [input]);
+  }, [lastChange, user]);
+
+  //add a new task
   const addTodo = (e) => {
     e.preventDefault();
     addDoc(collection(db, "todos"), {
@@ -46,7 +52,9 @@ function App({ user }) {
       userId: user.uid,
     });
     setInput("");
+    setLastChange(serverTimestamp());
   };
+
   return (
     <div className="App">
       <h4>Add a Task</h4>
@@ -58,6 +66,8 @@ function App({ user }) {
             variant="outline-secondary"
             size="lg"
             placeholder="Task Description"
+            required={true}
+            maxLength={140}
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />

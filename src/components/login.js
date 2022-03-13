@@ -22,6 +22,7 @@ function Login() {
         loginPassword
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
+      //FIX THIS
       navigate("/app", { replace: true });
       //console.log(user);
     } catch (error) {
