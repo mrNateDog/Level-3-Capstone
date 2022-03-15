@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-import "../App.css";
+//import "../App.css";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -22,7 +22,7 @@ function Register() {
       navigate("/app", { replace: true });
       alert("Account created successfully!");
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
   return (

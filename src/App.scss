@@ -1,0 +1,22 @@
+$primaryColor: grey;
+$accentColor: orange;
+$backgroundColor: white;
+
+body {
+  background-color: $backgroundColor;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.todoList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  border-bottom: 2px solid lightgray;
+  margin-bottom: 20px !important;
+}
+.App {
+  padding-top: 90px;
+  display: grid;
+  place-items: center;
+}
