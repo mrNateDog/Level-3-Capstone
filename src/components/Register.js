@@ -2,8 +2,10 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
-//import "../App.css";
+//import { Form, Button } from "react-bootstrap";
+import "../App.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -29,14 +31,15 @@ function Register() {
     <div className="App">
       <Form>
         <h3>Register</h3>
-        <Form.Group className="m-3" controlId="formBasicEmail"></Form.Group>
-        <Form.Control
-          placeholder="Email..."
-          value={registerEmail}
-          onChange={(event) => {
-            setRegisterEmail(event.target.value);
-          }}
-        />
+        <Form.Group className="m-3" controlId="formBasicEmail">
+          <Form.Control
+            placeholder="Email..."
+            value={registerEmail}
+            onChange={(event) => {
+              setRegisterEmail(event.target.value);
+            }}
+          />
+        </Form.Group>
         <Form.Group className="m-3" controlId="formBasicPassword">
           <Form.Control
             type="password"
@@ -46,7 +49,7 @@ function Register() {
             }}
           />
         </Form.Group>
-        <Button variant="outline-secondary" type="submit" onClick={register}>
+        <Button variant="outline-primary" type="submit" onClick={register}>
           {" "}
           Create User
         </Button>

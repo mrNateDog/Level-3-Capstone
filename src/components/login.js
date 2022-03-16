@@ -2,7 +2,11 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-//import "../App.scss";
+import "../App.scss";
+//import { Form, Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -32,27 +36,32 @@ function Login() {
 
   return (
     <div className="App">
-      <div>
+      <Form>
         <h3>Login</h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setLoginEmail(event.target.value);
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password..."
-          onChange={(event) => {
-            setLoginPassword(event.target.value);
-          }}
-        />
-
-        <button type="submit" onClick={login}>
-          {" "}
-          Login
-        </button>
-      </div>
+        <Form.Group className="m-3" controlId="formBasicEmail">
+          <Form.Control
+            placeholder="Email..."
+            onChange={(event) => {
+              setLoginEmail(event.target.value);
+            }}
+          />
+        </Form.Group>
+        <Form.Group className="m-3" controlId="formBasicPassword">
+          <Form.Control
+            type="password"
+            placeholder="Password..."
+            onChange={(event) => {
+              setLoginPassword(event.target.value);
+            }}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Button variant="outline-primary" type="submit" onClick={login}>
+            {" "}
+            Login
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
   );
 }

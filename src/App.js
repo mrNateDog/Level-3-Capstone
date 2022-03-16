@@ -70,7 +70,7 @@ function App({ user }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <Button variant="outline-secondary" type="submit" onClick={addTodo}>
+          <Button variant="outline-primary" type="submit" onClick={addTodo}>
             Add Task
           </Button>
         </InputGroup>
@@ -82,7 +82,7 @@ function App({ user }) {
       </ul>
       <br></br>
       <h6>
-        you have <a variant="alert-danger">{todos.length}</a> items left to
+        You have <a variant="alert-danger">{todos.length}</a> items left to
         complete.
       </h6>
     </div>
