@@ -3,7 +3,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import "../App.scss";
-//import { Form, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -11,13 +10,8 @@ function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  // const [setUser] = useState({});
-
   const navigate = useNavigate();
 
-  /* onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });*/
   const login = async () => {
     try {
       const user = await signInWithEmailAndPassword(
@@ -26,9 +20,9 @@ function Login() {
         loginPassword
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
-      //FIX THIS
+      //REDIRECT ISNT' WORKING!
       navigate("/App", { replace: true });
-      //console.log(user);
+      console.log(user, " logged in");
     } catch (error) {
       alert(error.message);
     }
@@ -56,7 +50,7 @@ function Login() {
           />
         </Form.Group>
         <Form.Group>
-          <Button variant="outline-primary" type="submit" onClick={login}>
+          <Button variant="outline-primary" onClick={login}>
             {" "}
             Login
           </Button>

@@ -1,4 +1,6 @@
-export const removeToken = () => {
-  // export function from module
-  localStorage.removeItem("access_token");
-};
+export function Logout() {
+  const removeToken = (isAuthenticated) => {
+    localStorage.removeItem("access_token");
+    console.log("signed out");
+  };
+}

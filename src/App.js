@@ -25,7 +25,6 @@ function App({ user }) {
   useEffect(() => {
     //console.log(user);
     if (user == null) return;
-
     var q = query(
       collection(db, "todos"),
       orderBy("timestamp", "desc"),
@@ -45,11 +44,18 @@ function App({ user }) {
   //add a new task
   const addTodo = (e) => {
     e.preventDefault();
-    addDoc(collection(db, "todos"), {
-      todo: input,
-      timestamp: serverTimestamp(),
-      userId: user.uid,
-    });
+    //add to prevent empty entries
+    //console.log(setInput);
+    //console.log(lastChange);
+    if (input === "") {
+      alert("Please enter a task.");
+    } else {
+      addDoc(collection(db, "todos"), {
+        todo: input,
+        timestamp: serverTimestamp(),
+        userId: user.uid,
+      });
+    }
     setInput("");
     setLastChange(serverTimestamp());
   };
@@ -57,19 +63,22 @@ function App({ user }) {
   return (
     <div className="App">
       <h4>Add a Task</h4>
-      <Form>
-        <InputGroup className="mb-3">
+      <Form className="needs-validation">
+        <InputGroup hasValidation className="mb-3">
           <Form.Control
             id="outlined-basic"
             type="text"
+            required
             variant="outline-secondary"
             size="lg"
             placeholder="Task Description"
-            required={true}
             maxLength={140}
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid">
+            Please enter a task.
+          </Form.Control.Feedback>
           <Button variant="outline-primary" type="submit" onClick={addTodo}>
             Add Task
           </Button>

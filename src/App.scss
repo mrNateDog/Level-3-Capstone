@@ -1,9 +1,11 @@
 $primaryColor: grey;
 $accentColor: orange;
 $backgroundColor: white;
+$textColor: #333333;
 
 body {
   background-color: $backgroundColor;
+  color: $textColor;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .todoList {
@@ -11,7 +13,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 400px;
+  width: 350px;
   border-bottom: 2px solid lightgray;
   margin-bottom: 20px !important;
 }

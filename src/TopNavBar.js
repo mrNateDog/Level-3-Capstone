@@ -21,12 +21,10 @@ function TopNavBar({ auth }) {
     } else {
     }
   });
-  //putting the sign-out functionality here-- not sure
+  //Logout Function
   const removeToken = (isAuthenticated) => {
-    // export function from module
     localStorage.removeItem("access_token");
-    // setToken(null);
-    //alert("signed out");
+    console.log("signed out");
   };
   return (
     <div>
@@ -45,6 +43,14 @@ function TopNavBar({ auth }) {
               />
               <Route path="/login" element={<Login />}></Route>
               <Route path="/register" element={<Register />}></Route>
+              <Route
+                path="*"
+                element={
+                  <main style={{ padding: "1rem" }}>
+                    <p>Nothing here to see... Move along.</p>
+                  </main>
+                }
+              />
             </Routes>
           </AuthProvider>
         </Router>

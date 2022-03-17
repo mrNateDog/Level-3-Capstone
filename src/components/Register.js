@@ -2,7 +2,6 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-//import { Form, Button } from "react-bootstrap";
 import "../App.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -12,7 +11,6 @@ function Register() {
   const [registerPassword, setRegisterPassword] = useState("");
 
   const navigate = useNavigate();
-
   const register = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -21,8 +19,8 @@ function Register() {
         registerPassword
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
-      navigate("/app", { replace: true });
-      alert("Account created successfully!");
+      navigate("/App", { replace: true });
+      console.log("Account created successfully!");
     } catch (error) {
       console.log(error.message);
     }
@@ -49,7 +47,7 @@ function Register() {
             }}
           />
         </Form.Group>
-        <Button variant="outline-primary" type="submit" onClick={register}>
+        <Button variant="outline-primary" onClick={register}>
           {" "}
           Create User
         </Button>
