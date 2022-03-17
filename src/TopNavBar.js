@@ -46,8 +46,8 @@ function TopNavBar({ auth }) {
               <Route
                 path="*"
                 element={
-                  <main style={{ padding: "1rem" }}>
-                    <p>Nothing here to see... Move along.</p>
+                  <main>
+                    <p>Nothing here to see... move along.</p>
                   </main>
                 }
               />
