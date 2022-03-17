@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./Auth";
 import { Nav, Navbar, Container } from "react-bootstrap";
@@ -27,34 +27,32 @@ function TopNavBar({ auth }) {
     console.log("signed out");
   };
   return (
-    <div>
-      <div>
-        <Router>
-          <AuthProvider value={{ currentUser }}>
-            <Routes>
-              <Route exact path="/" element={<Login />}></Route>
-              <Route
-                path="/app"
-                element={
-                  <PrivateRoute isAuthenticated={isAuthenticated}>
-                    <App user={currentUser}></App>
-                  </PrivateRoute>
-                }
-              />
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/register" element={<Register />}></Route>
-              <Route
-                path="*"
-                element={
-                  <main>
-                    <p>Nothing here to see... move along.</p>
-                  </main>
-                }
-              />
-            </Routes>
-          </AuthProvider>
-        </Router>
-      </div>
+    <>
+      <Router>
+        <AuthProvider value={{ currentUser }}>
+          <Routes>
+            <Route exact path="/" element={<Login />}></Route>
+            <Route
+              path="/app"
+              element={
+                <PrivateRoute isAuthenticated={isAuthenticated}>
+                  <App user={currentUser}></App>
+                </PrivateRoute>
+              }
+            />
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+            <Route
+              path="*"
+              element={
+                <main>
+                  <p>Nothing here to see... move along.</p>
+                </main>
+              }
+            />
+          </Routes>
+        </AuthProvider>
+      </Router>
       <Navbar fixed="top" bg="secondary" variant="dark">
         <Container>
           <Navbar.Brand href="/app">
@@ -73,7 +71,7 @@ function TopNavBar({ auth }) {
           </Nav>
         </Container>
       </Navbar>
-    </div>
+    </>
   );
 }
 
