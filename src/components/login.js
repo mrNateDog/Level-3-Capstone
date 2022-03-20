@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import "../App.scss";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import "./login_style.scss";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -27,35 +25,34 @@ function Login() {
       alert(error.message);
     }
   };
+  //input styling fun
 
   return (
-    <div className="App">
-      <Form>
-        <h3>Login</h3>
-        <Form.Group className="m-3" controlId="formBasicEmail">
-          <Form.Control
-            placeholder="Email..."
-            onChange={(event) => {
-              setLoginEmail(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group className="m-3" controlId="formBasicPassword">
-          <Form.Control
-            type="password"
-            placeholder="Password..."
-            onChange={(event) => {
-              setLoginPassword(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Button variant="outline-primary" onClick={login}>
-            {" "}
-            Login
-          </Button>
-        </Form.Group>
-      </Form>
+    <div className="login-container">
+      <h3 className="title"> Login </h3>
+      <div className="input-container">
+        <input
+          className="fluid-input"
+          type="text"
+          placeholder="Email..."
+          onChange={(event) => {
+            setLoginEmail(event.target.value);
+          }}
+        />
+      </div>
+      <br></br>
+      <div className="fluid-input-holder">
+        <input
+          className="fluid-input"
+          type="password"
+          placeholder="Password..."
+          onChange={(event) => {
+            setLoginPassword(event.target.value);
+          }}
+        />
+      </div>
+      <button onClick={login}> Login</button>
+      <h6>Create an account </h6>
     </div>
   );
 }

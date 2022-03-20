@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import "../App.scss";
+import "./login_style.scss";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -26,32 +26,29 @@ function Register() {
     }
   };
   return (
-    <div className="App">
-      <Form>
-        <h3>Register</h3>
-        <Form.Group className="m-3" controlId="formBasicEmail">
-          <Form.Control
-            placeholder="Email..."
-            value={registerEmail}
-            onChange={(event) => {
-              setRegisterEmail(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Form.Group className="m-3" controlId="formBasicPassword">
-          <Form.Control
-            type="password"
-            placeholder="Password..."
-            onChange={(event) => {
-              setRegisterPassword(event.target.value);
-            }}
-          />
-        </Form.Group>
-        <Button variant="outline-primary" onClick={register}>
-          {" "}
-          Create User
-        </Button>
-      </Form>
+    <div className="login-container">
+      <h3 className="title"> Register User </h3>
+      <div className="input-container">
+        <input
+          className="fluid-input"
+          placeholder="Email..."
+          onChange={(event) => {
+            setRegisterEmail(event.target.value);
+          }}
+        />
+      </div>
+      <br></br>
+      <div className="input-container">
+        <input
+          className="fluid-input"
+          placeholder="Password..."
+          onChange={(event) => {
+            setRegisterPassword(event.target.value);
+          }}
+        />
+      </div>
+      <button onClick={register}> Create User</button>
+      <h6>Login with account </h6>
     </div>
   );
 }

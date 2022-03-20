@@ -45,10 +45,8 @@ function App({ user }) {
   const addTodo = (e) => {
     e.preventDefault();
     //add to prevent empty entries
-    //console.log(setInput);
-    //console.log(lastChange);
     if (input === "") {
-      alert("Please enter a task.");
+      alert("Please enter a task Description in the text box.");
     } else {
       addDoc(collection(db, "todos"), {
         todo: input,
