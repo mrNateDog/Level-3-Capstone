@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./login_style.scss";
-
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -19,7 +18,8 @@ function Login() {
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
       //REDIRECT ISNT' WORKING!
-      navigate("/App", { replace: true });
+      console.log(navigate);
+      navigate("/app", { replace: true });
       console.log(user, " logged in");
     } catch (error) {
       alert(error.message);
@@ -52,9 +52,10 @@ function Login() {
         />
       </div>
       <button onClick={login}> Login</button>
-      <h6>Create an account </h6>
+      <Link className="links" to="/register">
+        Create an Account
+      </Link>
     </div>
   );
 }
-
 export default Login;

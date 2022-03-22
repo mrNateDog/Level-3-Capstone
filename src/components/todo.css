@@ -1,8 +1,0 @@
-.todoList {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 800px;
-  border-bottom: 1px solid lightgray;
-  margin: 40px;
-}

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./login_style.scss";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -19,8 +17,9 @@ function Register() {
         registerPassword
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
-      navigate("/App", { replace: true });
       console.log("Account created successfully!");
+      console.log(navigate);
+      navigate("/app", { replace: true });
     } catch (error) {
       console.log(error.message);
     }
@@ -41,6 +40,7 @@ function Register() {
       <div className="input-container">
         <input
           className="fluid-input"
+          type="password"
           placeholder="Password..."
           onChange={(event) => {
             setRegisterPassword(event.target.value);
@@ -48,7 +48,9 @@ function Register() {
         />
       </div>
       <button onClick={register}> Create User</button>
-      <h6>Login with account </h6>
+      <Link className="links" to="/login">
+        Already have an account? Log in
+      </Link>
     </div>
   );
 }

@@ -1,0 +1,144 @@
+//usual reset stuff
+*,
+*:before,
+*:after,
+ul,
+li,
+a,
+button,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+img,
+image,
+svg,
+path,
+g,
+canvas {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  user-select: none;
+  list-style: none;
+  position: relative;
+}
+$primaryColor: grey;
+$accentColor: orange;
+$backgroundColor: white;
+$textColor: #333333;
+$deepBlue-5: #f1f3f4;
+$deepBlue-100: #000c2f;
+$blue-5: #f2f8ff;
+$blue-80: #3394ff;
+$blue-100: #007aff;
+$login-container-shadow: 0 1px 3px rgba(0, 0, 0, 0.06),
+  0 1px 2px rgba(0, 0, 0, 0.12);
+$button-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.12);
+@mixin size($width: inherit, $height: inherit) {
+  width: $width;
+  height: $height;
+}
+@mixin flex($align, $justify, $direction: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+@mixin border-radius(
+  $topLeft: 50%,
+  $topRight: 50%,
+  $botLeft: 50%,
+  $botRight: 50%
+) {
+  border-top-left-radius: $topLeft;
+  border-top-right-radius: $topRight;
+  border-bottom-left-radius: $botLeft;
+  border-bottom-right-radius: $botRight;
+}
+body {
+  background-color: rgb(177, 95, 95);
+  color: $textColor;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.login-container {
+  @include size(auto, auto);
+  @include flex(center, center, column);
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: $login-container-shadow;
+  //overflow: hidden;
+  //padding-top: 90px;
+  padding-bottom: 10px;
+
+  .title {
+    padding: 60px 0;
+    padding-bottom: 10px;
+  }
+}
+.todoList {
+  @include border-radius(5px, 5px, 5px, 5px);
+  min-width: 250px;
+  max-width: 450px;
+  background-color: $blue-5;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $deepBlue-5;
+  margin-bottom: 20px !important;
+  padding: 5px;
+
+  &:hover {
+    outline: none;
+    box-shadow: $login-container-shadow;
+  }
+}
+.App {
+  display: grid;
+  padding-top: 90px;
+
+  place-items: center;
+}
+.navBar {
+  @include border-radius(5px, 5px, 5px, 5px);
+  background-color: $blue-5;
+}
+
+.button {
+  @include border-radius(5px, 5px, 5px, 5px);
+  padding-bottom: 10px;
+  background-color: $blue-100;
+  color: #ffff;
+  //text-transform: uppercase;
+  margin: 40px 0;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 3px 20px 3px rgba($blue-100, 0.3);
+    background-color: $blue-100;
+  }
+}
+.fluid-input {
+  @include border-radius(5px, 5px, 5px, 5px);
+  @include size(80%, 50px);
+  height: 40px;
+  padding: 20px 15px;
+  min-width: 250px;
+  max-width: 450px;
+  position: relative;
+  background-color: $deepBlue-5;
+
+  &:focus {
+    outline: 1px;
+    box-shadow: $login-container-shadow;
+  }
+}
