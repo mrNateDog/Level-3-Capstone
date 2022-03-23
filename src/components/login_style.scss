@@ -64,7 +64,6 @@ $login-container-shadow: 0 1px 3px rgba(0, 0, 0, 0.06),
   0 1px 2px rgba(0, 0, 0, 0.12);
 $button-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.12);
 
-html,
 body {
   background: rgb(242, 248, 255);
   background: linear-gradient(
@@ -72,25 +71,40 @@ body {
     rgba(242, 248, 255, 1) 4%,
     rgba(0, 122, 255, 1) 100%
   );
-  background-repeat: no-repeat;
+  background-size: cover;
+  //background-repeat: repeat;
   margin: 0;
-  padding: 0;
+  padding: 5px;
 }
+h1 {
+  font-size: larger;
+}
+
 .App {
   background-color: white;
   margin-right: auto;
   margin-left: auto;
   min-width: 250px;
-  max-width: 800px;
+  max-width: 600px;
   display: grid;
   place-items: center;
   border: 1px solid $deepBlue-5;
+}
+.toDoTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 40px;
 }
 .login-container {
   @include size(400px, auto);
   @include flex(center, center, column);
 
-  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10% auto;
   background-color: white;
   box-shadow: $login-container-shadow;
   overflow: hidden;
@@ -122,6 +136,7 @@ body {
 .fluid-input {
   @include border-radius(5px, 5px, 5px, 5px);
   @include size(80%, 50px);
+  padding: 10px;
   min-width: 250px;
   max-width: 450px;
   position: relative;
@@ -158,7 +173,6 @@ body {
   border: 1px solid $deepBlue-5;
   margin-bottom: 20px !important;
   padding: 5px;
-  padding-left: -32px;
 
   &:hover {
     outline: none;

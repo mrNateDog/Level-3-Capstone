@@ -17,10 +17,9 @@ function Login() {
         loginPassword
       );
       localStorage.setItem("access_token", user._tokenResponse.idToken);
-      //REDIRECT ISNT' WORKING!
-      console.log(navigate);
+      //console.log(navigate);
       navigate("/app", { replace: true });
-      console.log(user, " logged in");
+      //console.log(user, " logged in");
     } catch (error) {
       alert(error.message);
     }
@@ -28,7 +27,7 @@ function Login() {
   //input styling fun
 
   return (
-    <div className="login-container">
+    <div className="login-container ">
       <h3 className="title"> Login </h3>
       <div className="input-container">
         <input
@@ -41,7 +40,7 @@ function Login() {
         />
       </div>
       <br></br>
-      <div className="fluid-input-holder">
+      <div className="input-container">
         <input
           className="fluid-input"
           type="password"

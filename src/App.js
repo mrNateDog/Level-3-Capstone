@@ -6,7 +6,6 @@ import CardGroup from "react-bootstrap/CardGroup";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./components/login_style.scss";
 import Todo from "./components/Todo";
-import { Nav, Navbar, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   collection,
@@ -18,8 +17,8 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import Logo from "./img/logo.png";
 import { useNavigate } from "react-router-dom";
+import "./index.css";
 
 //firebase functionality
 function App({ user }) {
@@ -72,24 +71,14 @@ function App({ user }) {
         localStorage.removeItem("access_token");
         console.log("signed out");
         console.log(navigate);
-        navigate("/app", { replace: true });
+        navigate("/login", { replace: true });
       };
       return (
-        <div>
-          <Navbar.Brand>
-            <img
-              src={Logo}
-              width="300"
-              height="75"
-              className="d-inline-block align-top"
-              alt="Logo"
-            />
-          </Navbar.Brand>
-          <Nav className="ms-auto">
-            <Nav.Link className="title" onClick={removeToken}>
-              Log Out
-            </Nav.Link>
-          </Nav>
+        <div className="toDoTitle">
+          <h1 className="Title">ToDo List</h1>
+          <Button className="taskButton" onClick={removeToken}>
+            Log Out
+          </Button>
         </div>
       );
     }
@@ -124,9 +113,8 @@ function App({ user }) {
           <Todo key={item.id} arr={item} />
         ))}
 
-        <h6 className="title">
-          You have <a variant="alert-danger">{todos.length}</a> items left to
-          complete.
+        <h6>
+          You have <a>{todos.length}</a> items left to complete.
         </h6>
       </Card.Body>
     </CardGroup>
