@@ -97,6 +97,7 @@ h1 {
   padding-bottom: 40px;
 }
 .login-container {
+  @include border-radius(5px, 5px, 5px, 5px);
   @include size(400px, auto);
   @include flex(center, center, column);
 
@@ -156,7 +157,8 @@ h1 {
   position: relative;
   background-color: $deepBlue-5;
 
-  &:focus {
+  &:focus,
+  hover {
     outline: 1px;
     box-shadow: $login-container-shadow;
   }
