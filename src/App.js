@@ -112,7 +112,6 @@ function App({ user }) {
         {todos.map((item) => (
           <Todo key={item.id} arr={item} />
         ))}
-
         <h6>
           You have <a>{todos.length}</a> items left to complete.
         </h6>

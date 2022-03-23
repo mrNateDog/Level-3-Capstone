@@ -19,9 +19,9 @@ function Register() {
       localStorage.setItem("access_token", user._tokenResponse.idToken);
       console.log("Account created successfully!");
       console.log(navigate);
-      navigate("/app", { replace: true });
+      navigate("/login", { replace: true });
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
   return (
