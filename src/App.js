@@ -27,7 +27,7 @@ function App({ user }) {
   const [lastChange, setLastChange] = useState("");
 
   //executing the query
-  useEffect(() => {
+  useEffect(async () => {
     if (user == null) return;
     var q = query(
       collection(db, "todos"),
@@ -53,6 +53,7 @@ function App({ user }) {
       alert("Please enter a task Description in the text box.");
     } else {
       addDoc(collection(db, "todos"), {
+        completed: false,
         todo: input,
         timestamp: serverTimestamp(),
         userId: user.uid,
@@ -102,7 +103,7 @@ function App({ user }) {
             <Form.Control.Feedback type="invalid">
               Please enter a task.
             </Form.Control.Feedback>
-            <Button className="taskButton" onClick={addTodo}>
+            <Button className="taskButton" type="submit" onClick={addTodo}>
               ADD
             </Button>
           </InputGroup>

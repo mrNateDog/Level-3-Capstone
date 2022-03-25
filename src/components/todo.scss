@@ -1,0 +1,17 @@
+.checkMark {
+  color: black;
+  &:hover,
+  &:active,
+  &:focus {
+    color: green;
+  }
+}
+#delete-icon {
+  color: none;
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active {
+    color: red;
+  }
+}

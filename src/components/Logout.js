@@ -8,8 +8,8 @@ class LogoutBar extends React.Component {
   render() {
     const removeToken = (isAuthenticated) => {
       localStorage.removeItem("access_token");
-      console.log("signed out");
-      console.log(navigate);
+      //console.log("signed out");
+      // console.log(navigate);
       navigate("/app", { replace: true });
     };
     return (

@@ -5,7 +5,7 @@ import * as firebase from "./firebase";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ToDoRoutes auth={firebase.auth} />
+    <ToDoRoutes auth={firebase.auth} />,
   </React.StrictMode>,
   document.getElementById("root")
 );
